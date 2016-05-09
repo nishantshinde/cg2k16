@@ -15,7 +15,7 @@ public class TestSemiFinal1 {
         int sum;
 
         startTime = System.currentTimeMillis();
-        int[] output1 = SemiFinal1.get(input1,input1.length);
+        int[] output1 = SemiFinal1.get(input1.clone(),input1.length);
         endTime = System.currentTimeMillis();
         sum = 0;
         for(int i=0;i<output1.length;i++){
@@ -51,12 +51,11 @@ public class TestSemiFinal1 {
             int nextValue = getRandomNumber(10000);
             output[i] = nextValue == 0 ? 1 : nextValue;
         }
-        
         return output;
     }
      static Random rn = new Random();
     static int getRandomNumber(int maximum){
        
-return rn.nextInt(maximum);
+    	return rn.nextInt(maximum);
     }
 }
