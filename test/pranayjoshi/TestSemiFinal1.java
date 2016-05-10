@@ -5,9 +5,9 @@ import java.util.Random;
 
 public class TestSemiFinal1 {
 	public static void main(String[] args) {
-
-		// int[] input1 = {4,2,3,6};
-		// int[] input1 = {1,2,3,4,5,6};
+	//	int[] input1 = {3};
+	//	 int[] input1 = {4,2,3,6};
+	//	 int[] input1 = {1,2,3,4,5,6};
 		// int[] input1 = {1,1,1,1,1,1,1,1};
 		int[] input1 = getRandomInputArray(80000);
 
