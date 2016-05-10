@@ -39,8 +39,8 @@ public class SemiFinalProblem2 {
 
 		// printArray(field);
 		int length = -1, maxLength = -1;
-		int maxRowStep = input1 / 3 + 1;
-		int maxColumnStep = input2 / 3 + 1;
+		int maxRowStep = input1 / 2;
+		int maxColumnStep = input2 / 2;
 
 		for (int r = 0; r < input1; r++) {
 			for (int c = 0; c < input2; c++) {
