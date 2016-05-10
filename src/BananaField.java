@@ -174,7 +174,7 @@ public class BananaField extends Application {
     }
 
     public String generateId(int r, int c) {
-    	return "("+r+","+c+")";
+    	return "("+(r+1)+","+(c+1)+")";
     }
     
 }
