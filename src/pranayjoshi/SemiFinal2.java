@@ -88,12 +88,23 @@ public class SemiFinal2 {
 				return false;
 			}
 			Collections.sort(distroyedTrees);
-			while(true){
+			double pathLength = Math.sqrt(sqrOfdistanceBetweenPoints(startPoint,endPoint));
+			int minJump = (int) (pathLength / distroyedTrees.size());
+			int maxJump = (int) (pathLength) / 2;
+			int presentJump = minJump < 1 ? 1: minJump;
+			
+			while(presentJump < maxJump){
 				
 				
 				break;
 			}
 			return false;
+		}
+		
+		private int sqrOfdistanceBetweenPoints(Point startPoint,Point endPoint){
+			int xdiff = startPoint.x - endPoint.x;
+			int ydiff = startPoint.y-endPoint.y;
+			return  xdiff*xdiff + ydiff*ydiff;
 		}
 
 		@Override
