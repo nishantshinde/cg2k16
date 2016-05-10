@@ -88,26 +88,18 @@ public class SemiFinal2Nish {
 			return false;
 		}
 		
-		public boolean isMonkeyPath(){
+		public int getMonkeyPathLength(int maxX, int maxY){
+			
 			if(distroyedTrees.size() < 3) {
-				return false;
+				return -1;
 			}
 			Collections.sort(distroyedTrees);
-			/*
-			double pathLength = Math.sqrt(sqrOfdistanceBetweenPoints(startPoint,endPoint));
-			int minJump = (int) (pathLength / distroyedTrees.size());
-			int maxJump = (int) (pathLength) / 2;
-			int presentJump = minJump < 1 ? 1: minJump;
-			while(presentJump < maxJump){
-				break;
-			}
-			*/
-// NISHANT - START HERE
+
 			int currentJumpIndex = 0;
 nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 				currentJumpIndex++;
 				// Initialize
-				int currentIndex = 0;
+				int currentIndex = 0, monkeyPathLength = 2;
 				int nextIndex = currentIndex + currentJumpIndex;
 				Point currentPoint = distroyedTrees.get(currentIndex);
 				Point nextPoint = distroyedTrees.get(nextIndex);
@@ -117,7 +109,7 @@ nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 				
 				// Iterate till end
 				while((currentIndex + currentJumpIndex)<(distroyedTrees.size()-1)) {
-					currentIndex++;
+					currentIndex++; monkeyPathLength++;
 					nextIndex = currentIndex + currentJumpIndex;
 					currentPoint = distroyedTrees.get(currentIndex);
 					nextPoint = distroyedTrees.get(nextIndex);
@@ -128,12 +120,15 @@ nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 				}
 				// Reached end
 				if((currentIndex + currentJumpIndex)==distroyedTrees.size()-1) {
-					return true;
-				}
+					if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
+							&&( ((endPoint.x+dx)>maxX) || ((endPoint.y+dy)>maxY) ) // After end point
+					  ) {
+						return monkeyPathLength;
+					}
+				}	
 			}
 			
-			return false;
-// NISHANT - END HERE
+			return -1;
 			
 		}
 		
@@ -222,7 +217,8 @@ nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 		path4.addPointIfItsOnThePath(p1);
 		path4.addPointIfItsOnThePath(p2);
 		path4.addPointIfItsOnThePath(p3);
-		System.out.println("Path 4 isMonkeyPath() " +path4.isMonkeyPath());
+		System.out.println("Path 4 isMonkeyPath() " +path4.getMonkeyPathLength(5,5));
+		System.out.println("Path 4 isMonkeyPath() " +path4.getMonkeyPathLength(7,7));
 
 	}
 
