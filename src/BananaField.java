@@ -195,10 +195,10 @@ public class BananaField extends Application {
 		private void updateButtonState() {
 			if(destroyed) {
 				this.setText(CELL_CONTENTS_DESTROYED);
-				this.setSelected(true);
+				if(!this.isSelected()) this.setSelected(true);
 			}else{
 				this.setText(CELL_CONTENTS_INTACT);
-				this.setSelected(false);
+				if(this.isSelected())this.setSelected(false);
     		}
 		}
    	
