@@ -22,10 +22,11 @@ import javafx.stage.Stage;
 
 public class BananaField extends Application {
 	
-    public static final int NUMBER_OF_ROWS = 12, NUMBER_OF_COLUMNS= 12;
+    public static final int NUMBER_OF_ROWS = 15, NUMBER_OF_COLUMNS= 15;
     private static final int CELL_SIZE = 25;
     private static final int CELL_PADDING = 4;
-    private static final String CELL_CONTENTS = "#"; // "#*+" 
+    private static final String CELL_CONTENTS_DESTROYED = "#"; // "#*+" 
+    private static final String CELL_CONTENTS_INTACT = " "; // "#*+"
     private static final Insets CELL_INSETS = new Insets(CELL_PADDING,CELL_PADDING,CELL_PADDING,CELL_PADDING);
     
     private final List<BananaButton> buttons = new ArrayList<BananaButton>();
@@ -40,22 +41,10 @@ public class BananaField extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Banana Trees ");
         
-        EventHandler toggler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	ToggleButton btn = (ToggleButton)event.getSource();
-            	if(btn.isSelected()) {
-            		btn.setText(CELL_CONTENTS);
-            	} else {
-            		btn.setText(" ");
-            	}
-            }
-        };
-        
         //StackPane root = new StackPane();
         GridPane root = new GridPane();
 
-        generateBananaButtons(root, toggler);
+        generateBananaButtons(root);
         
         generateStringControls(root);
         
@@ -63,15 +52,15 @@ public class BananaField extends Application {
         primaryStage.show();
     }
 
-    private void generateBananaButtons(GridPane root, EventHandler toggler) {
+    private void generateBananaButtons(GridPane root) {
         BananaButton btn;
         int r,c;
 
         for (int i=0;i<NUMBER_OF_ROWS*NUMBER_OF_COLUMNS;i++ ) {
         	r = i/NUMBER_OF_COLUMNS; c=i%NUMBER_OF_COLUMNS;
-        	btn = getDefaultButton(r,c,toggler);
+        	btn = getDefaultButton(r,c);
         	buttons.add(btn);
-        	buttonsMap.put(btn.getData(), btn);
+        	buttonsMap.put(btn.getDisplayId(), btn);
         	root.getChildren().add(btn);
         	root.setConstraints(btn, c, r, 1, 1, 
         			HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER, 
@@ -112,8 +101,8 @@ public class BananaField extends Application {
             public void handle(ActionEvent event) {
             	StringBuilder sb = new StringBuilder("(");
             	for(BananaButton btn:buttons) {
-            		if(btn.isSelected()) {
-            			sb.append(btn.getData()).append(',');
+            		if(btn.isDestroyed()) {
+            			sb.append("("+(btn.getR()+1)+","+(btn.getC()+1)+")").append(',');
             		}
             	}
             	if(sb.charAt(sb.length()-1)==',') {
@@ -143,38 +132,88 @@ public class BananaField extends Application {
 //                	System.out.println(s1 + " " + s2);
                 	i1 = Integer.parseInt(s1);
                 	i2 = Integer.parseInt(s2);
-                	System.out.println(generateId(i1, i2));
+                	String idString = BananaButton.getDisplayId(i1-1, i2-1);
+                	buttonsMap.get(idString).setDestroyed(true);
+                	System.out.println(idString);
                 }          	
             }
+            
+            private void deselectAll() {
+            	for(BananaButton btn: buttonsMap.values()) {
+            		btn.setDestroyed(false);
+            	}
+            }
+            
         };
     }
     
-    private BananaButton getDefaultButton(int r, int c, EventHandler toggler) {
-    	BananaButton btn = new BananaButton(generateId(r,c));
-    	btn.setText(" ");
-    	btn.setOnAction(toggler);
+    private BananaButton getDefaultButton(int r, int c) {
+    	BananaButton btn = new BananaButton(r,c);
+    	btn.setText(CELL_CONTENTS_INTACT);
     	btn.setMinSize(CELL_SIZE, CELL_SIZE);
     	btn.setMaxSize(CELL_SIZE, CELL_SIZE);
     	return btn;
     }
     
-    class BananaButton extends ToggleButton {
+    static class BananaButton extends ToggleButton {
 
-    	private String data;
+    	private int r,c;
+    	private boolean destroyed=false;
     	
-		public BananaButton(String data) {
+		public BananaButton(int r, int c) {
 			super();
-			this.data = data;
+			this.r = r;
+			this.c = c;
+			this.setOnAction(toggler);
 		}
 
-		public String getData() {
-			return data;
+		public int getR() {
+			return r;
 		}
-    	
-    }
 
-    public String generateId(int r, int c) {
-    	return "("+(r+1)+","+(c+1)+")";
+		public int getC() {
+			return c;
+		}
+
+		public String getDisplayId() {
+			return this.getDisplayId(r, c);
+		}
+		
+		public static String getDisplayId(int r, int c) {
+			return r+"#"+c;
+		}
+		
+		public boolean isDestroyed() {
+			return destroyed;
+		}
+
+		public void setDestroyed(boolean destroyed) {
+			this.destroyed = destroyed;
+			this.updateButtonState();
+		}
+
+		private void updateButtonState() {
+			if(destroyed) {
+				this.setText(CELL_CONTENTS_DESTROYED);
+				this.setSelected(true);
+			}else{
+				this.setText(CELL_CONTENTS_INTACT);
+				this.setSelected(false);
+    		}
+		}
+   	
     }
     
+    static EventHandler toggler = new EventHandler<ActionEvent>() {
+    	@Override
+    	public void handle(ActionEvent event) {
+    		BananaButton btn = (BananaButton)event.getSource();
+    		if(btn.isSelected()) {
+    			btn.setDestroyed(true);
+    		} else {
+    			btn.setDestroyed(false);
+    		}
+    	}
+    };
+
 }
