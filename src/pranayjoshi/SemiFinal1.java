@@ -8,7 +8,6 @@ package pranayjoshi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -19,39 +18,27 @@ public class SemiFinal1 {
 	/**
      * @param args the command line arguments
      */
-    //static List<Integer> op = new ArrayList<>();
-    static int[] op ;
+    static int[] outputArray ;
     static int k = 0;
     static int[] get(int[] input1,int input2){
     	if(input2 == 1){
-    		op = new int[0];
+    		outputArray = new int[0];
     	}
-        op = new int [input2-1];
-        System.err.println("the size of op "+op.length);
+        outputArray = new int [input2-1];
         Arrays.sort(input1);
         List<Integer> integerList = getListFromAnArray(input1);
         while(integerList.size() > 1){
-        	process(integerList);;
+        	processList(integerList);;
         }
-//        int[] output = get1(input1,input2);
-//        while(output.length > 1){
-//            output = get1(output,output.length);
-//        }
-     //   return Arrays.copyOfRange(op, 0, op.length-1);
-     return op;
+     return outputArray;
         
     }
     
-    private static void process(List<Integer> list){
-    	if(list.size() == 1){
-    		return ;
-    	}
+    private static void processList(List<Integer> list){
     	int sum = list.get(0) + list.get(1);
 		list.remove(1);
 		list.remove(0);
-	//	System.out.println("k is " +k);
-	//	System.out.println("sum " +sum);
-		op[k++] = sum;
+		outputArray[k++] = sum;
 		mergeList(list,sum);
     }
     
@@ -68,33 +55,8 @@ public class SemiFinal1 {
     	if(!inserted){
     		list.add(element);
     	}
-    //	print(list);
     }
     
-    private static void print(List<Integer> list) {
-		System.out.println("Printing list");
-		for(Integer i : list){
-			System.out.println(i);
-		}
-		
-	}
-
-	static int[] get1(int[] input1 ,int input2){
-         if(input2 == 1){
-            return new int[] {0};
-        }
-        
-       
-        
-      int sum    = input1[0] + input1[1];
-        op[k++] = sum;
-        int[] output = getMergedArray(sum,input1,2);
-      //  get1(output,output.length);
-        
-        return output;
-        
-       // return output;
-    }
     
     private static List<Integer> getListFromAnArray(int[] array){
     	List<Integer> integerList = new ArrayList<>();
@@ -105,31 +67,6 @@ public class SemiFinal1 {
     	return integerList;
     }
     
-    static int[] getMergedArray(int elementToMerged ,int[] array,int startIndex){
-        int[] mergedSortedArry = new int[array.length - startIndex + 1];
-        int j=0;
-        boolean inserted = false;
-        for(int i=startIndex;i<array.length;i++){
-            if(elementToMerged <= array[i] && !inserted){
-                mergedSortedArry[j++] = elementToMerged;
-                mergedSortedArry[j++] =array[i];
-                inserted = true;
-            }else{
-                mergedSortedArry[j++] =array[i];
-            }
-        }
-        if(!inserted){ // element to be inserted in last location
-            mergedSortedArry[j] = elementToMerged;
-        }
-        return mergedSortedArry;
-    }
-    
-    
-  static void print(int[] array){
-      for(int i=0;i<array.length;i++){
-          System.out.println(array[i]);
-      }
-  }
     
     
     public static void main(String[] args) {
@@ -156,19 +93,6 @@ public class SemiFinal1 {
 
     }
     
-    static int[] getRandomInputArray(int length){
-        int[] output = new int[length];
-        for(int i=0;i<length;i++){
-            int nextValue = getRandomNumber(10000);
-            output[i] = nextValue == 0 ? 1 : nextValue;
-        }
-        
-        return output;
-    }
-     static Random rn = new Random();
-    static int getRandomNumber(int maximum){
-       
-return rn.nextInt(maximum);
-    }
+
     
 }
