@@ -1,3 +1,4 @@
+import pranayjoshi.SemiFinal2Nish;
 
 public class SemiFinalProblem2Test {
     public static void main(String[] args) {
@@ -6,14 +7,15 @@ public class SemiFinalProblem2Test {
 			@Override
 			public void doWork(int input1, int input2, int input3, String input4) {
 				System.out.println(
-						SemiFinalProblem2.maxTreeDestroyed(input1, input2, input3, input4) 
+						//SemiFinalProblem2.maxTreeDestroyed(input1, input2, input3, input4)
+						SemiFinal2Nish.maxTreeDestroyed(input1, input2, input3, input4)
 				);
 			}
     	};
 
     	testCase1(worker);
-    	testCase2(worker);
-    	testCase3(worker);
+   // 	testCase2(worker);
+    //	testCase3(worker);
 
     }
     

@@ -47,6 +47,11 @@ public class SemiFinal2 {
 			return this.x - o.x;
 		}
 		
+		@Override
+		public String toString() {
+			return("("+(x+1)+","+(y+1)+")");
+		}
+		
 	}
 	
 	private static class Path {
@@ -83,22 +88,46 @@ public class SemiFinal2 {
 			return false;
 		}
 		
-		public boolean isMonkeyPath(){
+		public  int getMonkeyPathLength(int maxX, int maxY){
 			if(distroyedTrees.size() < 3) {
-				return false;
+				return -1;
 			}
 			Collections.sort(distroyedTrees);
 			double pathLength = Math.sqrt(sqrOfdistanceBetweenPoints(startPoint,endPoint));
 			int minJump = (int) (pathLength / distroyedTrees.size());
 			int maxJump = (int) (pathLength) / 2;
 			int presentJump = minJump < 1 ? 1: minJump;
-			
-			while(presentJump < maxJump){
+			int i = 0;
+			int skipLevel = 1;
+			equDistanceDistroyedTrees.clear();
+			boolean pathFound = true;
+			while(presentJump <= maxJump){
 				
-				
-				break;
+					Point p1 = distroyedTrees.get(i);
+					Point p2 = distroyedTrees.get(i+skipLevel);
+					equDistanceDistroyedTrees.add(p1);
+					equDistanceDistroyedTrees.add(p2);
+					int distance = sqrOfdistanceBetweenPoints(p1, p2);
+					
+					while(i+skipLevel <= distroyedTrees.size() ){
+						i++;
+						Point p3 = distroyedTrees.get(i+skipLevel);
+						int newDistance = sqrOfdistanceBetweenPoints(p2, p3);
+						if(distance == newDistance){
+							p2 = p3;
+							equDistanceDistroyedTrees.add(p2);
+						}else{
+							skipLevel++;
+							i = 0;
+							pathFound = false;
+							equDistanceDistroyedTrees.clear();
+							break;
+						}
+					}
+					presentJump++;
+					if(pathFound) 	break;
 			}
-			return false;
+			return equDistanceDistroyedTrees.size() == 0 ? -1 :equDistanceDistroyedTrees.size();
 		}
 		
 		private int sqrOfdistanceBetweenPoints(Point startPoint,Point endPoint){
@@ -126,20 +155,6 @@ public class SemiFinal2 {
 				return false;
 			Path other = (Path) obj;
 			
-//			if (endPoint == null) {
-//				if (other.endPoint != null)
-//					return false;
-//			} else if (!endPoint.equals(other.endPoint))
-//				return false;
-//			if (startPoint == null) {
-//				if (other.startPoint != null)
-//					return false;
-//			} else if (!startPoint.equals(other.startPoint))
-//				return false;
-			
-//			if((startPoint.equals(other.startPoint) || this.startPoint.equals(other.endPoint)) && (this.endPoint.equals(other.endPoint) || this.endPoint.equals(other.startPoint)) ){
-//				return true;
-//			}
 			
 			if((startPoint.equals(other.startPoint) && this.endPoint.equals(other.endPoint)) || (this.startPoint.equals(other.endPoint) && this.endPoint.equals(other.startPoint)) ){
 				return true;
@@ -150,7 +165,10 @@ public class SemiFinal2 {
 		}
 
 		
-		
+		@Override
+		public String toString() {
+			return("("+startPoint+","+endPoint+");");
+		}	
 		
 		
 		

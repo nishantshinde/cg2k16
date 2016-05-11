@@ -16,7 +16,7 @@ public class SemiFinalProblem2 {
 		int[][] field = new int[input1][input2];
 
 		// Initialize field
-		Scanner scanner = new Scanner(input4);
+	//	Scanner scanner = new Scanner(input4);
 		int index = 1;
 		String s1, s2;
 		int i1, i2;
