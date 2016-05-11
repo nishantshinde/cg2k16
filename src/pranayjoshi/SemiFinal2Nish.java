@@ -190,7 +190,8 @@ nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 				// Reached end
 				if((currentIndex + currentJumpIndex)==distroyedTrees.size()-1) {
 					if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
-							&&( ((endPoint.x+dx)>maxX) || ((endPoint.y+dy)>maxY) ) // After end point
+							&&( ((((distroyedTrees.get(currentIndex + currentJumpIndex))).x+dx)>maxX) 
+									|| (((distroyedTrees.get(currentIndex + currentJumpIndex)).y+dy)>maxY) ) // After end point
 					  ) {
 						return monkeyPathLength;
 					}
