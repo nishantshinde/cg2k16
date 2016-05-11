@@ -221,7 +221,7 @@ public class SemiFinal2 {
 							equDistanceDistroyedTrees.add(p2);
 						}else if((newDistance < distance) ) { //&&  (i+1+skipLevel < distroyedTrees.size())
 							int k=i+1;
-							pathFound = false;
+						//	pathFound = false;
 							//boolean flag = false;
 							while((newDistance <= distance) && (k+skipLevel < distroyedTrees.size()) ){
 								//flag = true;
@@ -230,21 +230,21 @@ public class SemiFinal2 {
 								if(distance == newDistance){
 									p2 = p3;
 									equDistanceDistroyedTrees.add(p2);
-									pathFound = true;
+								//	pathFound = true;
 									break; 
 								}else{
-									pathFound = false;
+								//	pathFound = false;
 								}
 								k++;
 							}
-							if(p3.equals(this.endPoint) && !pathFound){
-								System.out.println(" The point is " +p3 + " of the path " +this + " with skip level " +skipLevel);
-								skipLevel++;
-								i = 0;
-								pathFound = false;
-								equDistanceDistroyedTrees.clear();
-								break;
-							}
+//							if(p3.equals(this.endPoint) && !pathFound){
+//								System.out.println(" The point is " +p3 + " of the path " +this + " with skip level " +skipLevel);
+//								skipLevel++;
+//								i = 0;
+//								pathFound = false;
+//								equDistanceDistroyedTrees.clear();
+//								break;
+//							}
 
 						}else{
 							skipLevel++;
