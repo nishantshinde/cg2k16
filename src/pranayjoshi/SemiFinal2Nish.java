@@ -16,7 +16,7 @@ public class SemiFinal2Nish {
 		if (input1 < 1 || input1 > 100 || input2 < 1 || input2 > 100 || input3 < 3 || input3 > (input1 * input2)) {
 			return -1;
 		}
-		
+		points.clear(); paths.clear();
 		int index = 1;
 		String s1, s2;
 		int x, y;
@@ -36,15 +36,15 @@ public class SemiFinal2Nish {
 		} catch (Exception e) {
 			return -1;
 		}
-		System.out.println("Total Points " +points.size());
+//		System.out.println("Total Points " +points.size());
 		loadPath();
-		System.out.println("Total Path " +paths.size());
+//		System.out.println("Total Path " +paths.size());
 		addPointsToPath();
 		int max = -1;
 		for(Path path :paths){
 		    int treesDistroyedInAPath = path.getMonkeyPathLength(input1-1,input2-1);
 		    if(treesDistroyedInAPath > -1)
-		    System.out.println("The distroyed trees in the path " +path +" is " +treesDistroyedInAPath);
+//		    System.out.println("The distroyed trees in the path " +path +" is " +treesDistroyedInAPath);
 		    if(treesDistroyedInAPath > max){
 		    	
 		        max = treesDistroyedInAPath;
