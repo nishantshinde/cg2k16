@@ -44,7 +44,7 @@ public class SemiFinal2Nish {
 		for(Path path :paths){
 		    int treesDistroyedInAPath = path.getMonkeyPathLength(input1-1,input2-1);
 		    if(treesDistroyedInAPath > -1)
-		    System.out.println("The distroyed trees in the path " +path +" is " +treesDistroyedInAPath);
+		 //   System.out.println("The distroyed trees in the path " +path +" is " +treesDistroyedInAPath);
 		    if(treesDistroyedInAPath > max){
 		    	
 		        max = treesDistroyedInAPath;
