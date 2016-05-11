@@ -201,11 +201,12 @@ public class SemiFinal2 {
 			int skipLevel = 1;
 			equDistanceDistroyedTrees.clear();
 			boolean pathFound = true;
+			Point p1, p2, p3;
 		//	System.out.println(" Finding monkey path length for path " +this);
 			while(presentJump <= maxJump){
 				//	System.out.println(" The present Skip level is " +skipLevel + " and the present jump is " +presentJump);
-					Point p1 = distroyedTrees.get(i);
-					Point p2 = distroyedTrees.get(i+skipLevel);
+					p1 = distroyedTrees.get(i);
+					p2 = distroyedTrees.get(i+skipLevel);
 					equDistanceDistroyedTrees.add(p1);
 					equDistanceDistroyedTrees.add(p2);
 					int distance = sqrOfdistanceBetweenPoints(p1, p2);
@@ -213,7 +214,7 @@ public class SemiFinal2 {
 					
 					while(i+1+skipLevel < distroyedTrees.size() ){
 						i++;
-						Point p3 = distroyedTrees.get(i+skipLevel);
+						p3 = distroyedTrees.get(i+skipLevel);
 						int newDistance = sqrOfdistanceBetweenPoints(p2, p3);
 						//System.out.println("The sq of didtance between points " + p2 + " , " + p3 + " is "+ newDistance);
 						if(distance == newDistance){
@@ -263,7 +264,7 @@ public class SemiFinal2 {
 						int dy = Math.abs(point1.y - point2.y);
 						
 						if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
-								&&( ((endPoint.x+dx)>maxX) || ((endPoint.y+dy)>maxY) ) // After end point
+								&&( ((p2.x+dx)>maxX) || ((p2.y+dy)>maxY) ) // After end point
 						  ){
 							System.out.println("The equ distance points for the path  " +this);
 							System.out.println(" dx " +dx + " dy " +dy);
