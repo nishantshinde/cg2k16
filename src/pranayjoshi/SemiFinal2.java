@@ -258,22 +258,42 @@ public class SemiFinal2 {
 					presentJump++;
 					if(pathFound){
 						
+				//		boolean satisfiedBorderCase = checkBorderCase(maxX,maxY);
+						
 						Point point1 = equDistanceDistroyedTrees.get(0);
 						Point point2 = equDistanceDistroyedTrees.get(1);
+					//	Point point3 = equDistanceDistroyedTrees.get(equDistanceDistroyedTrees.size() -1);
 						int dx = Math.abs(point1.x - point2.x);
 						int dy = Math.abs(point1.y - point2.y);
+						
+						if(p2.equals(startPoint)){
+							System.out.println(" Changing p2 to point to last point which is " +point1);
+							p2 = point1; 
+						}
+						
 						
 						if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
 								&&( ((p2.x+dx)>maxX) || ((p2.y+dy)>maxY) ) // After end point
 						  ){
-							System.out.println("The equ distance points for the path  " +this);
-							System.out.println(" dx " +dx + " dy " +dy);
-							
-							for(Point point :equDistanceDistroyedTrees){
-								System.out.println(point);
-							}
+//							System.out.println("The equ distance points for the path  " +this);
+//							System.out.println(" dx " +dx + " dy " +dy);
+//							
+//							for(Point point :equDistanceDistroyedTrees){
+//								System.out.println(point);
+//							}
 							
 						}else{
+//							System.out.println("The path " +this + " does not satisfy border case where dx is " +dx + "  dy is " +dy);
+//							System.out.println("The value of p2 is " +p2);
+//							System.out.println("The value of start point is " +startPoint);
+//							System.out.println(" (startPoint.x-dx)  " +(startPoint.x-dx));
+//							System.out.println(" (startPoint.y-dy) " +(startPoint.y-dy));
+//							System.out.println(" ((p2.x+dx)) " +((p2.x+dx)));
+//							System.out.println(" ((p2.y+dy) ) " +((p2.y+dy)));
+//							
+//							for(Point point :equDistanceDistroyedTrees){
+//								System.out.println(point);
+//							}
 							equDistanceDistroyedTrees.clear();
 							//System.out.println("The above equ distance points do not form true monky path as they don't satisfy boundry conditions");
 						}
@@ -296,6 +316,40 @@ public class SemiFinal2 {
 			return equDistanceDistroyedTrees.size() == 0 ? -1 :equDistanceDistroyedTrees.size();
 		}
 		
+//		private boolean checkBorderCase(int maxX,int maxY) {
+//			//first point in the path 
+//			Point firstPointInThePath = equDistanceDistroyedTrees.get(0);
+//			Point point2 = equDistanceDistroyedTrees.get(1);
+//			// Last point in the path
+//			Point lastPointInThePath = equDistanceDistroyedTrees.get(equDistanceDistroyedTrees.size() -1);
+//			int dx = Math.abs(firstPointInThePath.x - point2.x);
+//			int dy = Math.abs(firstPointInThePath.y - point2.y);
+//			
+//			int dx1 = Math.abs(firstPointInThePath.x - lastPointInThePath.x);
+//			int dy1 = Math.abs(firstPointInThePath.y - lastPointInThePath.y);
+//			
+//			if(dx1 >= dy1){
+//				
+//			}else{
+//				
+//			}
+//			
+//			
+//			if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
+//					&&( ((p2.x+dx)>maxX) || ((p2.y+dy)>maxY) ) // After end point
+//			  ){
+//				System.out.println("The equ distance points for the path  " +this);
+//				System.out.println(" dx " +dx + " dy " +dy);
+//				
+//				for(Point point :equDistanceDistroyedTrees){
+//					System.out.println(point);
+//				}
+//				
+//			}
+//			
+//			return false;
+//		}
+
 		private int sqrOfdistanceBetweenPoints(Point startPoint,Point endPoint){
 			int xdiff = startPoint.x - endPoint.x;
 			int ydiff = startPoint.y-endPoint.y;
