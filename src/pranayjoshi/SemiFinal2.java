@@ -37,9 +37,8 @@ public class SemiFinal2 {
 		} catch (Exception e) {
 			return -1;
 		}
-		System.out.println("Total Points " +points.size());
+		
 		loadPath();
-		System.out.println("Total Path " +paths.size());
 		addPointsToPath();
 		int max = -1;
 		for(Path path :paths){
@@ -58,7 +57,6 @@ public class SemiFinal2 {
 	}
 	
 	private static void loadPath(){
-	    
 	    for(Point p : points)
 	    for(Point point :points){
 	        if(!p.equals(point)){
@@ -72,7 +70,6 @@ public class SemiFinal2 {
 	    for(Path path :paths){
 	        for(Point point :points){
 	            if(path.addPointIfItsOnThePath(point)){
-	            	//System.out.println("Point " +point + " is in between the path " +path);
 	            }
 	        }
 	    }
@@ -179,20 +176,13 @@ public class SemiFinal2 {
 			return false;
 		}
 		
-		private void printAllPointsInThePath(){
-			System.out.println("The points for paths are  " + this);
-			for(Point point :distroyedTrees){
-				System.out.print(point);
-			}
-			System.out.println();
-		}
+		
 		
 		public  int getMonkeyPathLength(int maxX, int maxY){
 			if(distroyedTrees.size() < 3) {
 				return -1;
 			}
 			Collections.sort(distroyedTrees);
-		//	printAllPointsInThePath();
 			double pathLength = Math.sqrt(sqrOfdistanceBetweenPoints(startPoint,endPoint));
 			int minJump = (int) (pathLength / distroyedTrees.size());
 			int maxJump = (int) (pathLength) / 2;
@@ -202,50 +192,32 @@ public class SemiFinal2 {
 			equDistanceDistroyedTrees.clear();
 			boolean pathFound = true;
 			Point p1, p2, p3;
-		//	System.out.println(" Finding monkey path length for path " +this);
 			while(presentJump <= maxJump){
-				//	System.out.println(" The present Skip level is " +skipLevel + " and the present jump is " +presentJump);
 					p1 = distroyedTrees.get(i);
 					p2 = distroyedTrees.get(i+skipLevel);
 					equDistanceDistroyedTrees.add(p1);
 					equDistanceDistroyedTrees.add(p2);
 					int distance = sqrOfdistanceBetweenPoints(p1, p2);
-				//	System.out.println("The sq of didtance between points " + p1 + " , " + p2 + " is "+ distance);
-					
 					while(i+1+skipLevel < distroyedTrees.size() ){
 						i++;
 						p3 = distroyedTrees.get(i+skipLevel);
 						int newDistance = sqrOfdistanceBetweenPoints(p2, p3);
-						//System.out.println("The sq of didtance between points " + p2 + " , " + p3 + " is "+ newDistance);
 						if(distance == newDistance){
 							p2 = p3;
 							equDistanceDistroyedTrees.add(p2);
 						}else if((newDistance < distance) ) { //&&  (i+1+skipLevel < distroyedTrees.size())
 							int k=i+1;
-						//	pathFound = false;
-							//boolean flag = false;
 							while((newDistance <= distance) && (k+skipLevel < distroyedTrees.size()) ){
-								//flag = true;
 								p3 = distroyedTrees.get(k+skipLevel);
 								newDistance = sqrOfdistanceBetweenPoints(p2, p3);
 								if(distance == newDistance){
 									p2 = p3;
 									equDistanceDistroyedTrees.add(p2);
-								//	pathFound = true;
 									break; 
 								}else{
-								//	pathFound = false;
 								}
 								k++;
 							}
-//							if(p3.equals(this.endPoint) && !pathFound){
-//								System.out.println(" The point is " +p3 + " of the path " +this + " with skip level " +skipLevel);
-//								skipLevel++;
-//								i = 0;
-//								pathFound = false;
-//								equDistanceDistroyedTrees.clear();
-//								break;
-//							}
 
 						}else{
 							skipLevel++;
@@ -258,16 +230,13 @@ public class SemiFinal2 {
 					presentJump++;
 					if(pathFound){
 						
-				//		boolean satisfiedBorderCase = checkBorderCase(maxX,maxY);
 						
 						Point point1 = equDistanceDistroyedTrees.get(0);
 						Point point2 = equDistanceDistroyedTrees.get(1);
-					//	Point point3 = equDistanceDistroyedTrees.get(equDistanceDistroyedTrees.size() -1);
 						int dx = Math.abs(point1.x - point2.x);
 						int dy = Math.abs(point1.y - point2.y);
 						
 						if(p2.equals(startPoint)){
-							System.out.println(" Changing p2 to point to last point which is " +point1);
 							p2 = point1; 
 						}
 						
@@ -275,80 +244,20 @@ public class SemiFinal2 {
 						if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
 								&&( ((p2.x+dx)>maxX) || ((p2.y+dy)>maxY) ) // After end point
 						  ){
-//							System.out.println("The equ distance points for the path  " +this);
-//							System.out.println(" dx " +dx + " dy " +dy);
-//							
-//							for(Point point :equDistanceDistroyedTrees){
-//								System.out.println(point);
-//							}
 							
 						}else{
-//							System.out.println("The path " +this + " does not satisfy border case where dx is " +dx + "  dy is " +dy);
-//							System.out.println("The value of p2 is " +p2);
-//							System.out.println("The value of start point is " +startPoint);
-//							System.out.println(" (startPoint.x-dx)  " +(startPoint.x-dx));
-//							System.out.println(" (startPoint.y-dy) " +(startPoint.y-dy));
-//							System.out.println(" ((p2.x+dx)) " +((p2.x+dx)));
-//							System.out.println(" ((p2.y+dy) ) " +((p2.y+dy)));
-//							
-//							for(Point point :equDistanceDistroyedTrees){
-//								System.out.println(point);
-//							}
 							equDistanceDistroyedTrees.clear();
-							//System.out.println("The above equ distance points do not form true monky path as they don't satisfy boundry conditions");
 						}
-						
-//						if(!((startPoint.x - dx < 0) || (startPoint.x +dx > maxX)) && ((startPoint.y - dy < 0) ||(startPoint.y + dy > maxY) )
-//								||(((endPoint.x - dx < 0) || (endPoint.x +dx > maxX)) && ((endPoint.y - dy < 0) ||(endPoint.y + dy > maxY)))){
-//							equDistanceDistroyedTrees.clear();
-//							System.out.println("The above equ distance points do not form true monky path as they don't satisfy boundry conditions");
-//						}
-						
 						
 						break;
 					}else{
 						equDistanceDistroyedTrees.clear();
 					}
 			}
-			//printAllPointsInThePath();
-			
-		//	System.out.println(" The end of path calculations ");
+	
 			return equDistanceDistroyedTrees.size() == 0 ? -1 :equDistanceDistroyedTrees.size();
 		}
 		
-//		private boolean checkBorderCase(int maxX,int maxY) {
-//			//first point in the path 
-//			Point firstPointInThePath = equDistanceDistroyedTrees.get(0);
-//			Point point2 = equDistanceDistroyedTrees.get(1);
-//			// Last point in the path
-//			Point lastPointInThePath = equDistanceDistroyedTrees.get(equDistanceDistroyedTrees.size() -1);
-//			int dx = Math.abs(firstPointInThePath.x - point2.x);
-//			int dy = Math.abs(firstPointInThePath.y - point2.y);
-//			
-//			int dx1 = Math.abs(firstPointInThePath.x - lastPointInThePath.x);
-//			int dy1 = Math.abs(firstPointInThePath.y - lastPointInThePath.y);
-//			
-//			if(dx1 >= dy1){
-//				
-//			}else{
-//				
-//			}
-//			
-//			
-//			if( ( ((startPoint.x-dx)<0) || ((startPoint.y-dy)<0) ) // Before start point
-//					&&( ((p2.x+dx)>maxX) || ((p2.y+dy)>maxY) ) // After end point
-//			  ){
-//				System.out.println("The equ distance points for the path  " +this);
-//				System.out.println(" dx " +dx + " dy " +dy);
-//				
-//				for(Point point :equDistanceDistroyedTrees){
-//					System.out.println(point);
-//				}
-//				
-//			}
-//			
-//			return false;
-//		}
 
 		private int sqrOfdistanceBetweenPoints(Point startPoint,Point endPoint){
 			int xdiff = startPoint.x - endPoint.x;
@@ -379,8 +288,6 @@ public class SemiFinal2 {
 			if((startPoint.equals(other.startPoint) && this.endPoint.equals(other.endPoint)) || (this.startPoint.equals(other.endPoint) && this.endPoint.equals(other.startPoint)) ){
 				return true;
 			}
-				
-			
 			return false;
 		}
 
@@ -389,52 +296,11 @@ public class SemiFinal2 {
 		public String toString() {
 			return("("+startPoint+","+endPoint+");");
 		}	
-		
-		
-		
-		
 	}
 
 	
 	
 	
 	
-	public static void main(String[] args) {
-		
-//		Point p1 = new Point(2,3);
-//		Point p2 = new Point(7,8);
-//		Point p3 = new Point(3,4);
-//		
-//		Path path1 = new Path(p1, p2);
-//		Path path2 = new Path(p2,p1);
-//		Path path3 = new Path(p2,p3);
-//		
-//		System.out.println("Are the path equal " +path1.equals(path2));
-//		System.out.println("Are the path equal " +path2.equals(path1));
-//		System.out.println("Are the path equal " +path2.equals(path3));
-//		System.out.println("Path 1 hash code " +path1.hashCode());
-//		System.out.println("Path 2 hash code " +path2.hashCode());
-//		System.out.println("Path 3 hash code " +path3.hashCode());
-
-		
-		Point p1 = new Point(3,1);
-		Point p2 = new Point(2,3);
-		Point p3 = new Point(1,5);
-		
-		Path path1 = new Path(p1, p2);
-//		Path path2 = new Path(p2,p1);
-//		Path path3 = new Path(p2,p3);
-		
-		System.out.println("is p3 in between p1 and p2  " +path1.addPointIfItsOnThePath(p3));
-//		System.out.println("Are the path equal " +path2.equals(path1));
-//		System.out.println("Are the path equal " +path2.equals(path3));
-//		System.out.println("Path 1 hash code " +path1.hashCode());
-//		System.out.println("Path 2 hash code " +path2.hashCode());
-//		System.out.println("Path 3 hash code " +path3.hashCode());
-
-		
-		
-		
-	}
 
 }

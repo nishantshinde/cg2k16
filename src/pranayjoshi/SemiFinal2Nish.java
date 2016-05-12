@@ -36,9 +36,9 @@ public class SemiFinal2Nish {
 		} catch (Exception e) {
 			return -1;
 		}
-		System.out.println("Total Points " +points.size());
+	//	System.out.println("Total Points " +points.size());
 		loadPath();
-		System.out.println("Total Path " +paths.size());
+	//	System.out.println("Total Path " +paths.size());
 		addPointsToPath();
 		int max = -1;
 		for(Path path :paths){
@@ -57,7 +57,6 @@ public class SemiFinal2Nish {
 	}
 	
 	private static void loadPath(){
-	    int i=0;
 	    
 	    for(Point p : points)
 	    for(Point point :points){
