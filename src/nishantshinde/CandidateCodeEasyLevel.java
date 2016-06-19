@@ -1,4 +1,5 @@
-import java.io.*;
+package nishantshinde;
+
 public class CandidateCodeEasyLevel 
 { 
 

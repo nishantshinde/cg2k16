@@ -1,10 +1,10 @@
+package nishantshinde;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -62,7 +62,7 @@ public class BananaField extends Application {
         	buttons.add(btn);
         	buttonsMap.put(btn.getDisplayId(), btn);
         	root.getChildren().add(btn);
-        	root.setConstraints(btn, c, r, 1, 1, 
+        	GridPane.setConstraints(btn, c, r, 1, 1, 
         			HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER, 
         			CELL_INSETS);
         }
@@ -74,28 +74,28 @@ public class BananaField extends Application {
     	btn.setOnAction(generateStringEventHandler());
     	
         root.getChildren().add(btn);
-        root.setConstraints(btn, 0, NUMBER_OF_ROWS, NUMBER_OF_COLUMNS+1, 1,
+        GridPane.setConstraints(btn, 0, NUMBER_OF_ROWS, NUMBER_OF_COLUMNS+1, 1,
         		HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, 
     			CELL_INSETS);
         
         textArea = new TextArea();
         textArea.setEditable(true);
         root.getChildren().add(textArea);
-        root.setConstraints(textArea, 0, NUMBER_OF_ROWS+1, NUMBER_OF_COLUMNS+1, 1,
+        GridPane.setConstraints(textArea, 0, NUMBER_OF_ROWS+1, NUMBER_OF_COLUMNS+1, 1,
         		HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, 
     			CELL_INSETS);
 
     	Button loadBtn = new Button(" Load() ");
     	loadBtn.setOnAction(loadStringEventHandler());
         root.getChildren().add(loadBtn);
-        root.setConstraints(loadBtn, 0, NUMBER_OF_ROWS+2, NUMBER_OF_COLUMNS+1, 1,
+        GridPane.setConstraints(loadBtn, 0, NUMBER_OF_ROWS+2, NUMBER_OF_COLUMNS+1, 1,
         		HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, 
     			CELL_INSETS);
 
         
     }
 
-    private EventHandler generateStringEventHandler() {
+    private EventHandler<ActionEvent> generateStringEventHandler() {
     	return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -115,7 +115,7 @@ public class BananaField extends Application {
         };
     }
     
-    private EventHandler loadStringEventHandler() {
+    private EventHandler<ActionEvent> loadStringEventHandler() {
     	return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -136,12 +136,6 @@ public class BananaField extends Application {
                 	buttonsMap.get(idString).setDestroyed(true);
                 	System.out.println(idString);
                 }          	
-            }
-            
-            private void deselectAll() {
-            	for(BananaButton btn: buttonsMap.values()) {
-            		btn.setDestroyed(false);
-            	}
             }
             
         };
@@ -176,7 +170,7 @@ public class BananaField extends Application {
 		}
 
 		public String getDisplayId() {
-			return this.getDisplayId(r, c);
+			return BananaButton.getDisplayId(r, c);
 		}
 		
 		public static String getDisplayId(int r, int c) {
@@ -204,7 +198,7 @@ public class BananaField extends Application {
    	
     }
     
-    static EventHandler toggler = new EventHandler<ActionEvent>() {
+    static EventHandler<ActionEvent> toggler = new EventHandler<ActionEvent>() {
     	@Override
     	public void handle(ActionEvent event) {
     		BananaButton btn = (BananaButton)event.getSource();

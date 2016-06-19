@@ -126,12 +126,11 @@ public class SemiFinal2Nish {
 		private final Point startPoint;
 		private final Point endPoint;
 		private List<Point> distroyedTrees;
-		private List<Point> equDistanceDistroyedTrees;
 		public Path(Point startPoint , Point endPoint){
 			this.startPoint = startPoint;
 			this.endPoint = endPoint;
 			distroyedTrees = new ArrayList<>();
-			equDistanceDistroyedTrees = new ArrayList<>();
+			new ArrayList<>();
 		}
 		
 		public boolean addPointIfItsOnThePath(Point point) {
@@ -201,12 +200,6 @@ nextjump:	while(currentJumpIndex<(distroyedTrees.size()-2)) {
 			
 		}
 		
-		private int sqrOfdistanceBetweenPoints(Point startPoint,Point endPoint){
-			int xdiff = startPoint.x - endPoint.x;
-			int ydiff = startPoint.y-endPoint.y;
-			return  xdiff*xdiff + ydiff*ydiff;
-		}
-
 		@Override
 		public int hashCode() {
 			final int prime = 31;

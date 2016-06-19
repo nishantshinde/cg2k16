@@ -1,4 +1,5 @@
-import java.io.*;
+package nishantshinde;
+
 public class CandidateCodeExpertLevel 
 { 
     public static int GetWaterLevel(int input1,int input2,int[] input3)

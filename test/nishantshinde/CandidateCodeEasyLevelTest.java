@@ -1,3 +1,5 @@
+package nishantshinde;
+import nishantshinde.CandidateCodeEasyLevel;
 
 public class CandidateCodeEasyLevelTest {
 

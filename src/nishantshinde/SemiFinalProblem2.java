@@ -1,3 +1,4 @@
+package nishantshinde;
 import java.util.Arrays;
 
 public class SemiFinalProblem2 {
@@ -99,6 +100,7 @@ public class SemiFinalProblem2 {
 		return length;
 	}
 
+	@SuppressWarnings("unused")
 	private static void printArray(int[][] array) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.println(Arrays.toString(array[i]));

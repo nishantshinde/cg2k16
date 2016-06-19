@@ -1,4 +1,7 @@
+package nishantshinde;
 import java.util.Arrays;
+
+import nishantshinde.CandidateCodeMediumLevel;
 
 public class CandidateCodeMediumLevelTest {
 
@@ -9,11 +12,9 @@ public class CandidateCodeMediumLevelTest {
 	}
 	
 	public static void test1() {
-		CandidateCodeMediumLevel cc = new CandidateCodeMediumLevel();
-		
 		int input1 = 4;
 		int[] input2 = new int[]{2,1,1,0} ;
-		System.out.println( Arrays.toString(cc.uniqueValue(input1, input2)) + " ?= {4,2,1,3} ");
+		System.out.println( Arrays.toString(CandidateCodeMediumLevel.uniqueValue(input1, input2)) + " ?= {4,2,1,3} ");
 	}
 
 

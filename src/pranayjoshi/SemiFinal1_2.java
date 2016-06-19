@@ -40,7 +40,6 @@ public class SemiFinal1_2 {
     
     static void mergeArray(int sum, int[] array){
         int i=1;
-        boolean inserted = false;
         array[0]=0;
         array[1]=sum;
 //        log("------------");

@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.*;
+package nishantshinde;
 
 public class SemiFinalProblem2_1_ForPranay {
 

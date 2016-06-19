@@ -1,5 +1,5 @@
-import java.io.*;
-import java.util.*;
+package nishantshinde;
+import java.util.Arrays;
 
 public class CandidateCode {
 
@@ -99,6 +99,7 @@ public class CandidateCode {
 		return length;
 	}
 
+	@SuppressWarnings("unused")
 	private static void printArray(int[][] array) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.println(Arrays.toString(array[i]));
